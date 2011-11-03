@@ -128,4 +128,52 @@ describe("SimpleClassJS", function() {
         // Then
         expect(instance.sum()).toBe(6);
     });
+
+    it("should have inherited classes", function() {
+        // Given
+        var Base = Class({
+            constructor: function(a) {
+                this.a = a;
+            },
+            getA: function(a) {
+                return this.a;
+            }
+        });
+        var Inherited = Class(Base, {
+            sum: function(b) {
+                return this.getA() + b;
+            }
+        });
+        // When
+        instance = new Inherited(2);
+    
+        // Then
+        expect(instance.sum(3)).toBe(5);
+    });
+
+    it("should override constructor", function() {
+        // Given
+        var Base = Class({
+            constructor: function(a) {
+                this.a = a;
+            },
+
+            getA: function(a) {
+                return this.a;
+            }
+        });
+        var Inherited = Class(Base, {
+            constructor: function(a) {
+                this.a = 2*a;
+            }
+        });
+
+        // When
+        instance = new Base(2);
+        instance2 = new Inherited(2);
+        
+        // Then
+        expect(instance.getA()).toBe(2);
+        expect(instance2.getA()).toBe(4);
+    });
 });
