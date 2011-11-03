@@ -6,11 +6,11 @@ var Class = function(methods) {
         }
     }
 
-    var context = {};
-
     var klass = function() {
-        constructor.apply(context, arguments);
+        constructor.apply(this, arguments);
     };
+
+    klass.prototype = methods;
 
     return klass;
 };
