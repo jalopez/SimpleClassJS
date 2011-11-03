@@ -176,4 +176,49 @@ describe("SimpleClassJS", function() {
         expect(instance.getA()).toBe(2);
         expect(instance2.getA()).toBe(4);
     });
+
+    it("should have inherited with no constructors", function() {
+        // Given
+        var Base = Class({
+            printHello: function() {
+                return "hello";
+            }
+        });
+
+        var Inherited = Class(Base, {
+            printWorld: function() {
+                return "world";
+            }
+        });
+        // When
+        var instance1 = new Base();
+        var instance2 = new Inherited();
+
+        // Then
+        expect(instance1.printHello()).toEqual("hello");
+        expect(instance2.printWorld()).toEqual("world");
+    });
+
+
+    it("should override instance methods", function() {
+        // Given
+        var Base = Class({
+            printHello: function() {
+                return "hello";
+            }
+        });
+
+        var Inherited = Class(Base, {
+            printHello: function() {
+                return "Hello World!";
+            }
+        });
+
+        // When
+        var instance = new Inherited();
+    
+        // Then
+        expect(instance.printHello()).toEqual("Hello World!");
+    });
+
 });
