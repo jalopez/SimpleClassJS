@@ -6,8 +6,10 @@ var Class = function(methods) {
         }
     }
 
+    var context = {};
+
     var klass = function() {
-        return new constructor();
+        constructor.apply(context, arguments);
     };
 
     return klass;

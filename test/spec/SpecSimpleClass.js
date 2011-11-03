@@ -20,4 +20,33 @@ describe("SimpleClassJS", function() {
 
         expect(i).toBe(2);
     });
+
+    it("should accept constructors with a parameter", function() {
+        var i = 0;
+
+        var Sum = Class({
+            constructor: function(sum) {
+                i += sum;
+            }
+        });
+
+        var instance1 = new Sum(3),
+            instance2 = new Sum(4);
+
+        expect(i).toBe(7);
+    });
+
+    it("should accept constructors with many parameters", function() {
+        var i = 0;
+
+        var Sum2 = Class({
+            constructor: function(a, b) {
+                i = a + b;
+            }
+        });
+
+        var instance1 = new Sum2(3,2);
+
+        expect(i).toBe(5);
+    });
 });
