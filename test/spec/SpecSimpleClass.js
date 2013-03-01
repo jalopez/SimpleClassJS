@@ -299,4 +299,33 @@ describe("SimpleClassJS", function() {
         // Then
         expect(instance.getA()).toBe(1); // Should not raise an error
     });
+
+    it("should support to call super in the constructor", function() {
+        // Given
+        var Base = Class({
+            constructor: function(a) {
+                this.a = a;
+            },
+            getA: function() {
+                return this.a;
+            }
+        });
+
+        var Inherited = Class(Base, {
+            constructor: function(a, b) {
+                this._super(a);
+                this.b = b;
+            },
+            getB: function() {
+                return this.b;
+            }
+        });
+
+        // When
+        var instance = new Inherited(3, 4);
+
+        // Then
+        expect(instance.getA()).toBe(3);
+        expect(instance.getB()).toBe(4);
+    });
 });

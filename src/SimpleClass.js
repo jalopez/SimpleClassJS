@@ -22,8 +22,10 @@ var Class = function() {
         }
     }
 
-    
+    var baseConstructor = baseClass && baseClass.prototype.constructor;
+
     var klass = function() {
+        this._super = baseConstructor || function() {};
         constructor.apply(this, arguments);
     };
 
