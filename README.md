@@ -40,15 +40,29 @@ Create a class with constructor, methods and context handling
     var honda = new Car("Honda", "Civic");
     honda.toString(); // will return "Honda Civic" 
 
-Inheritance
+Basic inheritance with \_super support to call parent methods
 
     var HybridCar = Class(Car, {
         // Overrides Car.toString
         toString: function() {
-            return this._super() + 'Hybrid';
+            return this._super() + ' Hybrid';
         }
     });
 
     var hybrid = new HybridCar("Honda", "Civic");
     hybrid.toString(); // will return "Honda Civic Hybrid"
 
+Chained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supported
+
+    var MyAwesomeCar = Class(HybridCar, {
+        constructor: function(manufacturer, model, speed) {
+            this._super(manufacturer, model);
+            this.speed = speed;
+        },
+        getSpeed: function() {
+            return this.speed;
+        },
+        toString: function() {
+            return this._super() + ' is Awesome';
+        }
+    });

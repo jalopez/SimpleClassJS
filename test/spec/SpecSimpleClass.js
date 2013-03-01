@@ -328,4 +328,37 @@ describe("SimpleClassJS", function() {
         expect(instance.getA()).toBe(3);
         expect(instance.getB()).toBe(4);
     });
+
+    it("should suport chained inheritance", function() {
+        // Given
+        var Base = Class({
+            constructor: function(a) {
+                this.a = a;
+            },
+            sum: function(number) {
+                return this.a + number;
+            }
+        });
+
+        var Inherited = Class(Base, {
+            sum: function(number) {
+                return this._super(number) + 2;
+            }
+        });
+
+        var OtherInherited = Class(Inherited, {
+            constructor: function() {
+                this._super(3);
+            },
+            sum: function(number, number2) {
+                return this._super(number) + number2;
+            }
+        });
+
+        // When
+        var instance = new OtherInherited();
+
+        // Then
+        expect(instance.sum(1, 2)).toBe(8); // 3 + 1 + 2 + 2
+    });
 });
