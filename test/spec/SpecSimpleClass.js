@@ -221,7 +221,7 @@ describe("SimpleClassJS", function() {
         expect(instance.printHello()).toEqual("Hello World!");
     });
 
-    it("should call parent method from a method using this.super()", function() {
+    it("should call parent method from a method using this._super()", function() {
         // Given
         var Base = Class({
             printHello: function() {
@@ -275,6 +275,6 @@ describe("SimpleClassJS", function() {
 
         // Then
         expect(instance1.getA()).toBe(2);
-        expect(instance2.getB()).toBe(6);
+        expect(instance1.getB()).toBe(6);
     });
 });

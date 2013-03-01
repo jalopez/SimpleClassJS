@@ -31,15 +31,15 @@ var Class = function() {
         klass.prototype = new baseClass;
     }
     for (var method in methods) {
-        if (methods.hasOwnProperty(method) && method != "constructor") {
+        if (methods.hasOwnProperty(method) && method !== "constructor") {
             var parentMethod = klass.prototype[method];
             if (parentMethod) {
-                klass.prototype[method] = function() {
-                    var _super = function() {
-                        return parentMethod.apply(this, arguments);
-                    }
-                    return methods[method].apply(this, arguments);
-                }
+                klass.prototype[method] = (function(_method, _super) {
+                    return function() {
+                        this._super = _super;
+                        return _method.apply(this, arguments);
+                    };
+                })(methods[method], parentMethod);
             } else {
                 klass.prototype[method] = methods[method];
             }
