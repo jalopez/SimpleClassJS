@@ -52,7 +52,7 @@ Basic inheritance with \_super support to call parent methods
     var hybrid = new HybridCar("Honda", "Civic");
     hybrid.toString(); // will return "Honda Civic Hybrid"
 
-Chained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supportedChained inheritance is also supported
+Chained inheritance is also supported
 
     var MyAwesomeCar = Class(HybridCar, {
         constructor: function(manufacturer, model, speed) {
