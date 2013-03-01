@@ -221,4 +221,60 @@ describe("SimpleClassJS", function() {
         expect(instance.printHello()).toEqual("Hello World!");
     });
 
+    it("should call parent method from a method using this.super()", function() {
+        // Given
+        var Base = Class({
+            printHello: function() {
+                return "hello world";
+            }
+        });
+
+        var Inherited = Class(Base, {
+            printHello: function() {
+                return this._super().toUpperCase();
+            }
+        });
+        
+        // When
+        var instance = new Inherited();
+
+        // Then
+        expect(instance.printHello()).toEqual("HELLO WORLD");
+    });
+
+
+    it("should have a single super for each method", function() {
+        // Given
+        var Base = Class({
+            constructor: function(a,b) {
+                this.a = a;
+                this.b = b;
+            },
+
+            getA: function() {
+                return this.a; 
+            },
+
+            getB: function() {
+                return this.b;
+            }
+        });
+
+        var Inherited = Class(Base, {
+            getA: function() {
+                return this._super() * 2;
+            },
+            
+            getB: function() {
+                return this._super() * 3;
+            }
+        });
+
+        // When
+        var instance1 = new Inherited(1, 2);
+
+        // Then
+        expect(instance1.getA()).toBe(2);
+        expect(instance2.getB()).toBe(6);
+    });
 });
