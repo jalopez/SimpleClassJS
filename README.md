@@ -40,3 +40,15 @@ Create a class with constructor, methods and context handling
     var honda = new Car("Honda", "Civic");
     honda.toString(); // will return "Honda Civic" 
 
+Inheritance
+
+    var HybridCar = Class(Car, {
+        // Overrides Car.toString
+        toString: function() {
+            return this._super() + 'Hybrid';
+        }
+    });
+
+    var hybrid = new HybridCar("Honda", "Civic");
+    hybrid.toString(); // will return "Honda Civic Hybrid"
+
