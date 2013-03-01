@@ -33,16 +33,13 @@ var Class = function() {
     for (var method in methods) {
         if (methods.hasOwnProperty(method) && method !== "constructor") {
             var parentMethod = klass.prototype[method];
-            if (parentMethod) {
-                klass.prototype[method] = (function(_method, _super) {
-                    return function() {
-                        this._super = _super;
-                        return _method.apply(this, arguments);
-                    };
-                })(methods[method], parentMethod);
-            } else {
-                klass.prototype[method] = methods[method];
-            }
+
+            klass.prototype[method] = (function(_method, _super) {
+                return function() {
+                    this._super = _super || function() {};
+                    return _method.apply(this, arguments);
+                };
+            })(methods[method], parentMethod);
         }
     }
     return klass;

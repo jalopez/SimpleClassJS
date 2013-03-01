@@ -277,4 +277,26 @@ describe("SimpleClassJS", function() {
         expect(instance1.getA()).toBe(2);
         expect(instance1.getB()).toBe(6);
     });
+
+    it("should support to call super in a non-overriden method", function() {
+        // Given
+        var Base = Class({
+            constructor: function(a) {
+                this.a = a;
+            }
+        });
+
+        var Inherited = Class(Base, {
+            getA: function() {
+                this._super();
+                return this.a;
+            }
+        });
+
+        // When
+        var instance = new Inherited(1);
+
+        // Then
+        expect(instance.getA()).toBe(1); // Should not raise an error
+    });
 });
