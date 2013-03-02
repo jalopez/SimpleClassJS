@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>SimpleClassJS by jalopez</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>SimpleClassJS</h1>
+        <p>A very lightweight yet powerful JS Framework to create classes</p>
+
+        <p class="view"><a href="https://github.com/jalopez/SimpleClassJS">View the Project on GitHub <small>jalopez/SimpleClassJS</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/jalopez/SimpleClassJS/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jalopez/SimpleClassJS/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jalopez/SimpleClassJS">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>SimpleClassJS</h1>
+
+<p>A lightweight JavaScript Class framework</p>
+
+<h2>Purpose</h2>
+
+<p>The purpose of this framework is to be lightweight and clean, but offering
+full OO support, including subclassing, inheritance and so.
+There are better class JS frameworks out there, but this is an exercise to
+see if I can make something simple but powerful enough for a real app.</p>
+
+<h2>Usage</h2>
+
+<p>Create an empty class</p>
+
+<pre><code>var Empty = Class();
+var instance = new Empty(); // Do nothing
+</code></pre>
+
+<p>Create a class with only a constructor</p>
+
+<pre><code>var Simple = Class({
+    constructor: function() {
+        alert("Hello World!");
+    }
+});
+var instance = new Simple(); // alert "Hello world!"
+</code></pre>
+
+<p>Create a class with constructor, methods and context handling</p>
+
+<pre><code>var Car = Class({
+    constructor: function(manufacturer, model) {
+        this.manufacturer = manufacturer;
+        this.model = model;
+    },
+    toString: function() {
+        return this.manufacturer + " " + this.model;
+    }
+});
+var honda = new Car("Honda", "Civic");
+honda.toString(); // will return "Honda Civic" 
+</code></pre>
+
+<p>Basic inheritance with _super support to call parent methods</p>
+
+<pre><code>var HybridCar = Class(Car, {
+    // Overrides Car.toString
+    toString: function() {
+        return this._super() + ' Hybrid';
+    }
+});
+
+var hybrid = new HybridCar("Honda", "Civic");
+hybrid.toString(); // will return "Honda Civic Hybrid"
+</code></pre>
+
+<p>Chained inheritance is also supported</p>
+
+<pre><code>var MyAwesomeCar = Class(HybridCar, {
+    constructor: function(manufacturer, model, speed) {
+        this._super(manufacturer, model);
+        this.speed = speed;
+    },
+    getSpeed: function() {
+        return this.speed;
+    },
+    toString: function() {
+        return this._super() + ' is Awesome';
+    }
+});
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jalopez">jalopez</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
