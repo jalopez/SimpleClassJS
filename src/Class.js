@@ -6,9 +6,9 @@ var Class = function() {
         baseClass = null;
 
     if (arguments[0]) {
-        if (typeof arguments[0] == "object") {
+        if (typeof arguments[0] === 'object') {
             methods = arguments[0];
-        } else if (typeof arguments[0] == "function") {
+        } else if (typeof arguments[0] === 'function') {
             baseClass = arguments[0];
             methods = arguments[1];
             constructor = baseClass.prototype.constructor;
@@ -16,8 +16,7 @@ var Class = function() {
             // TODO: Throw exception
         }
 
-        if (methods.hasOwnProperty("constructor") && 
-            typeof methods.constructor == "function") {
+        if (methods.hasOwnProperty('constructor') && typeof methods.constructor === 'function') {
             constructor = methods.constructor;
         }
     }
@@ -33,7 +32,7 @@ var Class = function() {
         klass.prototype = new baseClass;
     }
     for (var method in methods) {
-        if (methods.hasOwnProperty(method) && method !== "constructor") {
+        if (methods.hasOwnProperty(method) && method !== 'constructor') {
             var parentMethod = klass.prototype[method];
 
             klass.prototype[method] = (function(_method, _super) {
