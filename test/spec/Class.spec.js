@@ -1,4 +1,4 @@
-
+var Class = require('../../src/Class.js');
 
 describe('Class', function() {
 

@@ -45,3 +45,7 @@ var Class = function() {
     }
     return klass;
 };
+
+if (module) {
+    module.exports = Class;
+}
