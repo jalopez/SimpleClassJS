@@ -1,5 +1,7 @@
 SimpleClassJS
 =============
+[![Build Status](https://secure.travis-ci.org/jalopez/SimpleClassJS.png)](http://travis-ci.org/jalopez/SimpleClassJS)
+
 A lightweight JavaScript Class framework
 
 Purpose
