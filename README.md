@@ -16,10 +16,10 @@ Download & Insallation
  * Download Minified version available in `dist` folder
  * To include it in a web application:
     * Copy `dist/Class.min.js` where your javascripts are placed
-    * Include it in your index.html as: `&lt;script type="text/javascript" src="PATH_TO_YOUR_JS/Class.min.js"&gt;&lt;/script&gt;
+    * Include it in your index.html as: `&lt;script type="text/javascript" src="PATH_TO_YOUR_JS/Class.min.js"&gt;&lt;/script&gt;`
  * To include it in a Node.js app:
     * Copy `dist/Class.min.js` where your javascripts are placed
-    * Import it with `var Class = require('PATH_TO_YOUR_JS/Class.min.js');
+    * Import it with `var Class = require('PATH_TO_YOUR_JS/Class.min.js');`
 
 
 Usage
