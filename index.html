@@ -1,45 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>SimpleClassJS by jalopez</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="SimpleClassJS : A very lightweight yet powerful JS Framework to create classes" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>SimpleClassJS</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>SimpleClassJS</h1>
-        <p>A very lightweight yet powerful JS Framework to create classes</p>
 
-        <p class="view"><a href="https://github.com/jalopez/SimpleClassJS">View the Project on GitHub <small>jalopez/SimpleClassJS</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jalopez/SimpleClassJS">View on GitHub</a>
 
+          <h1 id="project_title">SimpleClassJS</h1>
+          <h2 id="project_tagline">A very lightweight yet powerful JS Framework to create classes</h2>
 
-        <ul>
-          <li><a href="https://github.com/jalopez/SimpleClassJS/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/jalopez/SimpleClassJS/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/jalopez/SimpleClassJS">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jalopez/SimpleClassJS/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jalopez/SimpleClassJS/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>SimpleClassJS</h1>
 
 <p>A lightweight JavaScript Class framework</p>
 
 <h2>Purpose</h2>
 
-<p>The purpose of this framework is to be lightweight and clean, but offering
+<p>The purpose of this framework is to be lightweight (&lt; 1K when minified) and clean, but offering
 full OO support, including subclassing, inheritance and so.
 There are better class JS frameworks out there, but this is an exercise to
 see if I can make something simple but powerful enough for a real app.</p>
 
-<h2>Usage</h2>
+<h2>Download &amp; Installation</h2>
+
+<ul>
+<li>Download Minified version available in <code>dist</code> folder</li>
+<li>To include it in a web application:
+
+<ul>
+<li>Copy <code>dist/Class.min.js</code> where your javascripts are placed</li>
+<li>Include it in your index.html as: <code>&lt;script type="text/javascript" src="PATH_TO_YOUR_JS/Class.min.js"&gt;&lt;/script&gt;</code>
+</li>
+</ul>
+</li>
+<li>To include it in a Node.js app:
+
+<ul>
+<li>Copy <code>dist/Class.min.js</code> where your javascripts are placed</li>
+<li>Import it with <code>var Class = require('PATH_TO_YOUR_JS/Class.min.js');</code>
+</li>
+</ul>
+</li>
+</ul><h2>Usage</h2>
 
 <p>Create an empty class</p>
 
@@ -101,12 +124,17 @@ hybrid.toString(); // will return "Honda Civic Hybrid"
 });
 </code></pre>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/jalopez">jalopez</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">SimpleClassJS maintained by <a href="https://github.com/jalopez">jalopez</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
