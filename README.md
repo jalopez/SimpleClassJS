@@ -6,10 +6,21 @@ A lightweight JavaScript Class framework
 
 Purpose
 -------
-The purpose of this framework is to be lightweight and clean, but offering
+The purpose of this framework is to be lightweight (< 1K when minified) and clean, but offering
 full OO support, including subclassing, inheritance and so.
 There are better class JS frameworks out there, but this is an exercise to
 see if I can make something simple but powerful enough for a real app.
+
+Download & Insallation
+----------------------
+ * Download Minified version available in `dist` folder
+ * To include it in a web application:
+    * Copy `dist/Class.min.js` where your javascripts are placed
+    * Include it in your index.html as: `<script type="text/javascript" src="<PATH_TO_YOUR_JS>/Class.min.js"></script>
+ * To include it in a Node.js app:
+    * Copy `dist/Class.min.js` where your javascripts are placed
+    * Import it with `var Class = require('<PATH_TO_YOUR_JS>/Class.min.js');
+     
 
 Usage
 -----
