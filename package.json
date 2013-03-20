@@ -1,0 +1,8 @@
+{
+    "name": "Class",
+    "version": "0.0.1",
+    "author": "Javier López<lopez.pardo@gmail.com",
+    "scripts": {
+        "test": "jasmine-node test"
+    }
+}

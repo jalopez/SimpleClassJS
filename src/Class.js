@@ -6,9 +6,9 @@ var Class = function() {
         baseClass = null;
 
     if (arguments[0]) {
-        if (typeof arguments[0] == "object") {
+        if (typeof arguments[0] === 'object') {
             methods = arguments[0];
-        } else if (typeof arguments[0] == "function") {
+        } else if (typeof arguments[0] === 'function') {
             baseClass = arguments[0];
             methods = arguments[1];
             constructor = baseClass.prototype.constructor;
@@ -16,14 +16,15 @@ var Class = function() {
             // TODO: Throw exception
         }
 
-        if (methods.hasOwnProperty("constructor") && 
-            typeof methods.constructor == "function") {
+        if (methods.hasOwnProperty('constructor') && typeof methods.constructor === 'function') {
             constructor = methods.constructor;
         }
     }
 
-    
+    var baseConstructor = baseClass && baseClass.prototype.constructor;
+
     var klass = function() {
+        this._super = baseConstructor || function() {};
         constructor.apply(this, arguments);
     };
 
@@ -31,19 +32,20 @@ var Class = function() {
         klass.prototype = new baseClass;
     }
     for (var method in methods) {
-        if (methods.hasOwnProperty(method) && method != "constructor") {
+        if (methods.hasOwnProperty(method) && method !== 'constructor') {
             var parentMethod = klass.prototype[method];
-            if (parentMethod) {
-                klass.prototype[method] = function() {
-                    var _super = function() {
-                        return parentMethod.apply(this, arguments);
-                    }
-                    return methods[method].apply(this, arguments);
-                }
-            } else {
-                klass.prototype[method] = methods[method];
-            }
+
+            klass.prototype[method] = (function(_method, _super) {
+                return function() {
+                    this._super = _super || function() {};
+                    return _method.apply(this, arguments);
+                };
+            })(methods[method], parentMethod);
         }
     }
     return klass;
 };
+
+if (module) {
+    module.exports = Class;
+}
