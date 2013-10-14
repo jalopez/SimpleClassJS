@@ -1,51 +1,79 @@
-var Class = function() {
-    // TODO: Check the number of arguments 
+/**
+ * Class mechanism
+ * @see https://github.com/jalopez/SimpleClassJS
+ * @param {Object|Function} parent The parent class of this one. If only one parameter, it will an
+ *									object containing the class methods.
+ * @param {Object=} methods (optional) The class methods. When omitted, methods will be the first param
+ * @return {Function} the class.
+ */
+var Class = function(parent, methods) {
 
-    var constructor = function(){},
-        methods = {},
-        baseClass = null;
+	var	BaseClass = null,
+		constructor = function() {};
 
-    if (arguments[0]) {
-        if (typeof arguments[0] === 'object') {
-            methods = arguments[0];
-        } else if (typeof arguments[0] === 'function') {
-            baseClass = arguments[0];
-            methods = arguments[1];
-            constructor = baseClass.prototype.constructor;
-        } else {
-            // TODO: Throw exception
-        }
+	methods = methods || {};
 
-        if (methods.hasOwnProperty('constructor') && typeof methods.constructor === 'function') {
-            constructor = methods.constructor;
-        }
-    }
+	if (parent) {
+		if (typeof parent === 'object') {
+			methods = parent;
+		} else {
+			// Assume it is a function
+			BaseClass = parent;
+			constructor = BaseClass.prototype.constructor;
+		}
 
-    var baseConstructor = baseClass && baseClass.prototype.constructor;
+		if (methods.hasOwnProperty('constructor') && typeof methods.constructor === 'function') {
+			constructor = methods.constructor;
+		}
+	}
 
-    var klass = function() {
-        this._super = baseConstructor || function() {};
-        constructor.apply(this, arguments);
-    };
+	var klass = function() {
+		if (!(this instanceof klass)) {
+			// Invoked without 'new'
+			// we need to wrap constructor call in a function to pass arguments
+			var F = function(args) {
+				return klass.apply(this, args);
+			};
+			F.prototype = klass.prototype;
+			return new F(arguments);
+		} else {
+			var prevSuper = this._super,
+				that = this;
 
-    if (baseClass) {
-        klass.prototype = new baseClass;
-    }
-    for (var method in methods) {
-        if (methods.hasOwnProperty(method) && method !== 'constructor') {
-            var parentMethod = klass.prototype[method];
+			this._super = function() {
+				if (BaseClass) {
+					BaseClass.apply(that, arguments);
+				}
+			};
+			constructor.apply(this, arguments);
+			this._super = prevSuper;
+		}
+	};
 
-            klass.prototype[method] = (function(_method, _super) {
-                return function() {
-                    this._super = _super || function() {};
-                    return _method.apply(this, arguments);
-                };
-            })(methods[method], parentMethod);
-        }
-    }
-    return klass;
+	if (BaseClass) {
+		// We need an intermediate class to avoid errors with constructors with parameters
+		var Intermediate = function() {};
+		Intermediate.prototype = BaseClass.prototype;
+		klass.prototype = new Intermediate();
+	}
+	for (var method in methods) {
+		if (methods.hasOwnProperty(method) && method !== 'constructor') {
+			var parentMethod = klass.prototype[method];
+
+			klass.prototype[method] = (function(_method, _super) {
+				return function() {
+					var prevSuper = this._super;
+					this._super = _super || function() {};
+					var ret = _method.apply(this, arguments);
+					this._super = prevSuper;
+					return ret;
+				};
+			})(methods[method], parentMethod);
+		}
+	}
+	return klass;
 };
 
-if (module) {
+if (typeof module !== 'undefined') {
     module.exports = Class;
 }

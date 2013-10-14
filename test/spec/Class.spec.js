@@ -1,4 +1,7 @@
-var Class = require('../../src/Class.js');
+
+if (typeof require !== 'undefined') {
+	var Class = require('../../src/Class.js');
+}
 
 describe('Class', function() {
 
@@ -331,36 +334,77 @@ describe('Class', function() {
         expect(instance.getB()).toBe(4);
     });
 
-    it('should suport chained inheritance', function() {
-        // Given
-        var Base = Class({
-            constructor: function(a) {
-                this.a = a;
-            },
-            sum: function(number) {
-                return this.a + number;
-            }
-        });
+    it('should support chained inheritance', function() {
+		// Given
+		var Base = Class({
+			constructor: function(a) {
+				this.a = a;
+			},
+			sum: function(number) {
+				return this.a + number;
+			}
+		});
 
-        var Inherited = Class(Base, {
-            sum: function(number) {
-                return this._super(number) + 2;
-            }
-        });
+		var Inherited = Class(Base, {
+			constructor: function(a) {
+				this._super(a * 2);
+			},
+			sum: function(number) {
+				return this._super(number) + 2;
+			}
+		});
 
-        var OtherInherited = Class(Inherited, {
-            constructor: function() {
-                this._super(3);
-            },
-            sum: function(number, number2) {
-                return this._super(number) + number2;
-            }
-        });
+		var OtherInherited = Class(Inherited, {
+			constructor: function() {
+				this._super(3);
+			},
+			sum: function(number, number2) {
+				return this._super(number) + number2;
+			}
+		});
 
-        // When
-        var instance = new OtherInherited();
+		// When
+		var instance = new OtherInherited();
 
-        // Then
-        expect(instance.sum(1, 2)).toBe(8); // 3 + 1 + 2 + 2
-    });
+		// Then
+		expect(instance.sum(1, 2)).toBe(11); // 3*2 + 1 + 2 + 2
+	});
+	
+	it('should suppport to create an instance without using new', function() {
+		var myClass = Class({
+			constructor: function(a) {
+				this.a = a;
+			},
+			getA: function() {
+				return this.a;
+			}
+		});
+
+		var instance1 = myClass(3),
+			instance2 = myClass(4);
+		expect(instance1).toEqual(jasmine.any(myClass));
+		expect(instance1.getA()).toEqual(3);
+		expect(instance2.getA()).toEqual(4);
+	});
+
+	it('should accept inherited constructors with parameters', function() {
+		// Given
+		var Base = Class({
+			constructor: function(object) {
+				this.prop1 = object.property; // Do something with the parameter, so it must be there
+			}
+		});
+
+		var Inherited = Class(Base, {
+			constructor: function(object) {
+				this._super(object);
+				this.prop2 = object.property2;
+			}
+		});
+		// When
+		var instance1 = new Inherited({property: 1, property2: 2});
+		// Then
+		expect(instance1.prop1).toBe(1);
+		expect(instance1.prop2).toBe(2);
+	});
 });
