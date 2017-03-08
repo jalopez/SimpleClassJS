@@ -1,6 +1,6 @@
 SimpleClassJS
 =============
-This project is deprectaded and no longer maintained. It is better to use [ES6 Classes](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Classes) plus [Babel](https://babeljs.io/) instead.
+This project is deprecated and no longer maintained. It is better to use [ES6 Classes](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Classes) plus [Babel](https://babeljs.io/) instead.
 
 [![Build Status](https://secure.travis-ci.org/jalopez/SimpleClassJS.png)](http://travis-ci.org/jalopez/SimpleClassJS)
 
